@@ -96,6 +96,16 @@ export default function Home() {
           />
           Go to turborepo.dev →
         </a>
+        <a href="/">
+          <Image
+            aria-hidden
+            src="/globe.svg"
+            alt="Home icon"
+            width={16}
+            height={16}
+          />
+          Back to Home →
+        </a>
       </footer>
     </div>
   );

@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -66,6 +67,9 @@ export default function Home() {
         <Button appName="web" className={styles.secondary}>
           Open alert
         </Button>
+        <Link href="/docs" className={styles.secondary}>
+          Go to docs
+        </Link>
       </main>
       <footer className={styles.footer}>
         <a
@@ -95,6 +99,16 @@ export default function Home() {
             height={16}
           />
           Go to turborepo.dev →
+        </a>
+        <a href="/docs">
+          <Image
+            aria-hidden
+            src="/file-text.svg"
+            alt="Docs icon"
+            width={16}
+            height={16}
+          />
+          Go to Docs →
         </a>
       </footer>
     </div>

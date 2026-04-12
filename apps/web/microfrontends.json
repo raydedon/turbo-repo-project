@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turborepo.dev/microfrontends/schema.json",
+  "applications": {
+    "web": {
+      "development": {
+        "local": {
+          "port": 3000
+        }
+      }
+    },
+    "docs": {
+      "routing": [
+        {
+          "paths": ["/docs", "/docs/:path*"]
+        }
+      ],
+      "development": {
+        "local": {
+          "port": 3001
+        }
+      }
+    }
+  },
+  "options": {
+    "localProxyPort": 3024
+  }
+}
