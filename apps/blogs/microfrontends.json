@@ -1,17 +1,17 @@
 {
   "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "applications": {
-    "web": {
+    "blogs": {
       "development": {
         "local": {
           "port": 3000
         }
       }
     },
-    "docs": {
+    "users": {
       "routing": [
         {
-          "paths": ["/docs", "/docs/:path*"]
+          "paths": ["/users", "/users/:path*"]
         }
       ],
       "development": {
