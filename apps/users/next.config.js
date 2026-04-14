@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {
-  // Required for microfrontend zone routing — all /users/* paths proxied here
-  basePath: "/users",
-};
+const nextConfig = {};
 
 export default nextConfig;
