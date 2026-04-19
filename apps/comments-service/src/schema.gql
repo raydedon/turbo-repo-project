@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: ID!
+}
+
+type Comment {
+  id: ID!
+  postId: ID!
+  name: String!
+  email: String!
+  body: String!
+  post: Post!
+}
+
+type Query {
+  """Fetch all comments for a post"""
+  comments(postId: ID!): [Comment!]!
+}
+
+type Mutation {
+  """Add a comment to a post (triggers commentAdded subscription)"""
+  addComment(postId: ID!, name: String!, email: String!, body: String!): Comment!
+}

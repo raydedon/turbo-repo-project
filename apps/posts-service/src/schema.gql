@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+}
+
+type Post {
+  id: ID!
+  userId: Int!
+  title: String!
+  body: String!
+  publishedAt: String!
+  author: User!
+}
+
+type PostsPage {
+  posts: [Post!]!
+  total: Int!
+  page: Int!
+  perPage: Int!
+}
+
+type Query {
+  """Paginated posts in chronological order"""
+  posts(page: Int! = 1, perPage: Int! = 10): PostsPage!
+
+  """Fetch a post by ID"""
+  post(id: ID!): Post
+
+  """Fetch all posts by a user"""
+  postsByUser(userId: ID!): [Post!]!
+}
+
+type Mutation {
+  """Create a new post (triggers postPublished subscription)"""
+  createPost(userId: ID!, title: String!, body: String!): Post!
+}

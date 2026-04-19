@@ -1,0 +1,19 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  // postId is a logical reference to posts-service — NOT a foreign key
+  postId    Int
+  name      String
+  email     String
+  body      String
+  createdAt DateTime @default(now())
+}
