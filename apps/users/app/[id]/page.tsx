@@ -1,18 +1,62 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getUserById } from "../../lib/api";
+import type { User } from "../../lib/types";
+import UserPostsSection from "./components/UserPostsSection";
+
+const GRAPHQL_URL =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:4000";
+
+async function gqlFetch<T>(
+  query: string,
+  variables?: Record<string, unknown>,
+): Promise<T | null> {
+  try {
+    const res = await fetch(GRAPHQL_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, variables }),
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (json.errors?.length) return null;
+    return json.data ?? null;
+  } catch {
+    return null;
+  }
+}
+
+// Equivalent of getStaticPaths — pre-renders all user routes at build time
+export async function generateStaticParams() {
+  const data = await gqlFetch<{ users: { id: number }[] }>(`
+    query { users { id } }
+  `);
+  return data?.users.map((u) => ({ id: String(u.id) })) ?? [];
+}
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
+// Equivalent of getStaticProps — fetches data at build time per route
 export default async function UserDetailPage({ params }: Props) {
   const { id } = await params;
-  const user = await getUserById(Number(id));
 
-  if (!user) {
-    notFound();
-  }
+  const data = await gqlFetch<{ user: User | null }>(
+    `
+    query GetUser($id: ID!) {
+      user(id: $id) {
+        id name username email phone website
+        address { street suite city zipcode geo { lat lng } }
+        company { name catchPhrase bs }
+      }
+    }
+  `,
+    { id },
+  );
+
+  if (!data?.user) notFound();
+  const user = data.user;
 
   return (
     <div style={{ maxWidth: "720px" }}>
@@ -50,7 +94,6 @@ export default async function UserDetailPage({ params }: Props) {
           gap: "1.5rem",
         }}
       >
-        {/* Contact */}
         <Section title="Contact">
           <Field label="Email">
             <a href={`mailto:${user.email}`}>{user.email}</a>
@@ -67,7 +110,6 @@ export default async function UserDetailPage({ params }: Props) {
           </Field>
         </Section>
 
-        {/* Address */}
         <Section title="Address">
           <Field label="Street">
             {user.address.street}, {user.address.suite}
@@ -79,13 +121,14 @@ export default async function UserDetailPage({ params }: Props) {
           </Field>
         </Section>
 
-        {/* Company */}
         <Section title="Company" style={{ gridColumn: "1 / -1" }}>
           <Field label="Name">{user.company.name}</Field>
           <Field label="Catch Phrase">{user.company.catchPhrase}</Field>
           <Field label="Business">{user.company.bs}</Field>
         </Section>
       </div>
+
+      <UserPostsSection userId={user.id} />
     </div>
   );
 }

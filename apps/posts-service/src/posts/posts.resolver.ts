@@ -1,11 +1,19 @@
-import { Args, ID, Int, Mutation, Parent, Query, ResolveField, ResolveReference, Resolver } from '@nestjs/graphql';
-import { PubSub } from 'graphql-subscriptions';
-import { Post, PostsPage, User } from './dto/post.type';
-import { PostsDataLoader } from './posts.dataloader';
-import { PostsService } from './posts.service';
+import {
+  Args,
+  ID,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  ResolveReference,
+  Resolver,
+} from "@nestjs/graphql";
+import { Post, PostsPage, User } from "./dto/post.type";
+import { PostsDataLoader } from "./posts.dataloader";
+import { PostsService } from "./posts.service";
 
-const pubSub = new PubSub();
-const POST_PUBLISHED = 'postPublished';
+const POST_PUBLISHED = "postPublished";
 
 @Resolver(() => Post)
 export class PostsResolver {
@@ -14,21 +22,23 @@ export class PostsResolver {
     private readonly postsDataLoader: PostsDataLoader,
   ) {}
 
-  @Query(() => PostsPage, { description: 'Paginated posts in chronological order' })
+  @Query(() => PostsPage, {
+    description: "Paginated posts in chronological order",
+  })
   posts(
-    @Args('page', { type: () => Int, defaultValue: 1 }) page: number,
-    @Args('perPage', { type: () => Int, defaultValue: 10 }) perPage: number,
+    @Args("page", { type: () => Int, defaultValue: 1 }) page: number,
+    @Args("perPage", { type: () => Int, defaultValue: 10 }) perPage: number,
   ) {
     return this.postsService.findAll(page, perPage);
   }
 
-  @Query(() => Post, { nullable: true, description: 'Fetch a post by ID' })
-  post(@Args('id', { type: () => ID }) id: string) {
+  @Query(() => Post, { nullable: true, description: "Fetch a post by ID" })
+  post(@Args("id", { type: () => ID }) id: string) {
     return this.postsService.findById(Number(id));
   }
 
-  @Query(() => [Post], { description: 'Fetch all posts by a user' })
-  postsByUser(@Args('userId', { type: () => ID }) userId: string) {
+  @Query(() => [Post], { description: "Fetch all posts by a user" })
+  postsByUser(@Args("userId", { type: () => ID }) userId: string) {
     return this.postsService.findByUserId(Number(userId));
   }
 
@@ -39,17 +49,19 @@ export class PostsResolver {
    */
   @ResolveField(() => User)
   author(@Parent() post: Post): { __typename: string; id: number } {
-    return { __typename: 'User', id: post.userId };
+    return { __typename: "User", id: post.userId };
   }
 
-  @Mutation(() => Post, { description: 'Create a new post (triggers postPublished subscription)' })
+  @Mutation(() => Post, {
+    description: "Create a new post (triggers postPublished subscription)",
+  })
   async createPost(
-    @Args('userId', { type: () => ID }) userId: string,
-    @Args('title') title: string,
-    @Args('body') body: string,
+    @Args("userId", { type: () => ID }) userId: string,
+    @Args("title") title: string,
+    @Args("body") body: string,
   ) {
     const post = await this.postsService.create(Number(userId), title, body);
-    await pubSub.publish(POST_PUBLISHED, { postPublished: post });
+    // await pubSub.publish(POST_PUBLISHED, { postPublished: post });
     return post;
   }
 

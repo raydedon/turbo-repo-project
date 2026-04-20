@@ -1,12 +1,14 @@
 {
-  "$schema": "https://openapi.vercel.sh/microfrontends.json",
+  "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "applications": {
-    "turbo-repo-project-blogs": {
+    "blogs": {
+      "packageName": "blogs",
       "development": {
         "fallback": "turbo-repo-project-blogs.vercel.app"
       }
     },
-    "turbo-repo-project-users": {
+    "users": {
+      "packageName": "users",
       "routing": [
         {
           "paths": ["/users", "/users/:path*"]

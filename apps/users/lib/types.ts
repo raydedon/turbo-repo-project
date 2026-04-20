@@ -1,3 +1,10 @@
+export interface Post {
+  id: number;
+  title: string;
+  body: string;
+  publishedAt: string;
+}
+
 export interface Address {
   street: string;
   suite: string;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import ApolloProvider from "../components/ApolloProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -56,9 +57,11 @@ export default function RootLayout({
             </a>
           </nav>
         </header>
-        <main style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
-          {children}
-        </main>
+        <ApolloProvider>
+          <main style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+            {children}
+          </main>
+        </ApolloProvider>
       </body>
     </html>
   );

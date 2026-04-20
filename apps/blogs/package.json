@@ -11,7 +11,9 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^4.1.7",
     "@repo/ui": "*",
+    "graphql": "^16.13.2",
     "next": "16.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
