@@ -60,9 +60,45 @@ export default function BlogCard({ post }: Props) {
         >
           {post.body}
         </p>
-        <span style={{ fontSize: "0.8rem", color: "var(--accent)", marginTop: "auto" }}>
-          Read more →
-        </span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "auto",
+          }}
+        >
+          <span style={{ fontSize: "0.8rem", color: "var(--accent)" }}>Read more →</span>
+          {post.author && (
+            <div style={{ display: "flex", alignItems: "center", gap: "0.375rem" }}>
+              <div
+                style={{
+                  width: "1.5rem",
+                  height: "1.5rem",
+                  borderRadius: "50%",
+                  background: "var(--accent)",
+                  color: "#fff",
+                  fontSize: "0.65rem",
+                  fontWeight: 700,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                {post.author.name.charAt(0).toUpperCase()}
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <p style={{ fontSize: "0.75rem", fontWeight: 600, lineHeight: 1.2 }}>
+                  {post.author.name}
+                </p>
+                <p style={{ fontSize: "0.65rem", color: "var(--muted)", lineHeight: 1.2 }}>
+                  @{post.author.username}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </article>
     </Link>
   );

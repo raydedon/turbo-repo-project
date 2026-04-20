@@ -520,8 +520,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const CommentScalarFieldEnum = {
   id: 'id',
   postId: 'postId',
-  name: 'name',
-  email: 'email',
+  userId: 'userId',
   body: 'body',
   createdAt: 'createdAt'
 } as const

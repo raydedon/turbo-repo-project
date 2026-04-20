@@ -11,6 +11,17 @@ export class Post {
   id!: number;
 }
 
+/**
+ * User stub — defined in users-service, referenced here for federation.
+ * resolvable: false means this service only provides userId as a join key.
+ */
+@ObjectType()
+@Directive('@key(fields: "id", resolvable: false)')
+export class User {
+  @Field(() => ID)
+  id!: number;
+}
+
 @ObjectType()
 @Directive('@key(fields: "id")')
 export class Comment {
@@ -20,11 +31,11 @@ export class Comment {
   @Field(() => ID)
   postId!: number;
 
-  @Field()
-  name!: string;
+  @Field(() => ID)
+  userId!: number;
 
-  @Field()
-  email!: string;
+  @Field(() => User)
+  user?: User;
 
   @Field()
   body!: string;

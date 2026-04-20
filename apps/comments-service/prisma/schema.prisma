@@ -10,10 +10,9 @@ datasource db {
 
 model Comment {
   id        Int      @id @default(autoincrement())
-  // postId is a logical reference to posts-service — NOT a foreign key
+  // postId/userId are logical references — NOT foreign keys (cross-service)
   postId    Int
-  name      String
-  email     String
+  userId    Int
   body      String
   createdAt DateTime @default(now())
 }

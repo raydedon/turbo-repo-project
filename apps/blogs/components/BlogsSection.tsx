@@ -21,6 +21,11 @@ const GET_POSTS = gql`
         title
         body
         publishedAt
+        author {
+          id
+          name
+          username
+        }
       }
     }
   }

@@ -65,16 +65,16 @@ const MOCK_POSTS: Post[] = [
 ];
 
 const MOCK_COMMENTS: Comment[] = [
-  { id: 1,  postId: 1, name: "id labore ex et quam laborum", email: "Eliseo@gardner.biz", body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium" },
-  { id: 2,  postId: 1, name: "quo vero reiciendis velit similique earum", email: "Jayne_Kuhic@sydney.com", body: "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et" },
-  { id: 3,  postId: 1, name: "odio adipisci rerum aut animi", email: "Nikita@garfield.biz", body: "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione" },
-  { id: 4,  postId: 1, name: "alias odio sit", email: "Lew@alysha.tv", body: "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati" },
-  { id: 5,  postId: 1, name: "vero eaque aliquid doloribus et culpa", email: "Hayden@althea.biz", body: "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et" },
-  { id: 6,  postId: 2, name: "et fugit eligendi deleniti quidem qui sint nihil autem", email: "Presley.Mueller@myrl.com", body: "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nid dolore corrupti fuga sed odio ipsam" },
-  { id: 7,  postId: 2, name: "repellat consequatur praesentium vel minus molestias voluptatum", email: "Dallas@ole.me", body: "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor" },
-  { id: 8,  postId: 2, name: "in non nisi est dolores suscipit mollitia", email: "Mallory_Kunze@marie.org", body: "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque" },
-  { id: 9,  postId: 2, name: "consequatur omnis aut qui saepe", email: "Veronica_Goodwin@timmothy.net", body: "cum natus atque eum dolores quidem voluptate iusto\nnam aut voluptatem animi tenetur quod ea ad\nvoluptatem delectus aperiam quasi eum dolore maxime\nqui totam in" },
-  { id: 10, postId: 2, name: "temporibus sit alias delectus eligendi possimus magni", email: "Rahel.Hamill@jung.net", body: "debitis et qui\nvoluptatem harum ea\naut quae iure quo sunt rerum\nillo et saepe rerum aut et quidem adipisci" },
+  { id: 1,  postId: 1, userId: 2,  body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium" },
+  { id: 2,  postId: 1, userId: 3,  body: "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et" },
+  { id: 3,  postId: 1, userId: 4,  body: "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione" },
+  { id: 4,  postId: 1, userId: 5,  body: "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati" },
+  { id: 5,  postId: 1, userId: 6,  body: "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et" },
+  { id: 6,  postId: 2, userId: 7,  body: "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nid dolore corrupti fuga sed odio ipsam" },
+  { id: 7,  postId: 2, userId: 8,  body: "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor" },
+  { id: 8,  postId: 2, userId: 9,  body: "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque" },
+  { id: 9,  postId: 2, userId: 10, body: "cum natus atque eum dolores quidem voluptate iusto\nnam aut voluptatem animi tenetur quod ea ad\nvoluptatem delectus aperiam quasi eum dolore maxime\nqui totam in" },
+  { id: 10, postId: 2, userId: 1,  body: "debitis et qui\nvoluptatem harum ea\naut quae iure quo sunt rerum\nillo et saepe rerum aut et quidem adipisci" },
 ];
 
 export async function getPosts(page: number, perPage: number): Promise<PostsPage> {

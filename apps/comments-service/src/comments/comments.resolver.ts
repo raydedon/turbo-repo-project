@@ -8,7 +8,7 @@ import {
   ResolveReference,
   Resolver,
 } from "@nestjs/graphql";
-import { Comment, Post } from "./dto/comment.type";
+import { Comment, Post, User } from "./dto/comment.type";
 import { CommentsDataLoader } from "./comments.dataloader";
 import { CommentsService } from "./comments.service";
 
@@ -35,22 +35,20 @@ export class CommentsResolver {
     return { __typename: "Post", id: comment.postId };
   }
 
+  @ResolveField(() => User)
+  user(@Parent() comment: Comment): { __typename: string; id: number } {
+    return { __typename: "User", id: comment.userId };
+  }
+
   @Mutation(() => Comment, {
-    description: "Add a comment to a post (triggers commentAdded subscription)",
+    description: "Add a comment to a post",
   })
   async addComment(
     @Args("postId", { type: () => ID }) postId: string,
-    @Args("name") name: string,
-    @Args("email") email: string,
     @Args("body") body: string,
+    @Args("userId", { type: () => ID }) userId: string,
   ) {
-    const comment = await this.commentsService.create(
-      Number(postId),
-      name,
-      email,
-      body,
-    );
-    return comment;
+    return this.commentsService.create(Number(postId), body, Number(userId));
   }
 
   @ResolveReference()

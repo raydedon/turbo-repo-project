@@ -25,13 +25,13 @@ export default function Comment({ comment }: Props) {
         }}
       >
         <span style={{ fontWeight: 600, fontSize: "0.875rem" }}>
-          {comment.name}
+          {comment.user?.username}
         </span>
         <a
-          href={`mailto:${comment.email}`}
+          href={`/users/${comment.userId}`}
           style={{ fontSize: "0.75rem", color: "var(--muted)" }}
         >
-          {comment.email}
+          {comment.user?.email}
         </a>
       </div>
       <p

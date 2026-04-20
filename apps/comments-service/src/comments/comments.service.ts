@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../prisma.service";
+
+const SELECT = { id: true, postId: true, userId: true, body: true } as const;
 
 @Injectable()
 export class CommentsService {
@@ -8,29 +10,29 @@ export class CommentsService {
   async findByPostId(postId: number) {
     return this.prisma.comment.findMany({
       where: { postId },
-      orderBy: { createdAt: 'asc' },
-      select: { id: true, postId: true, name: true, email: true, body: true },
+      orderBy: { createdAt: "asc" },
+      select: SELECT,
     });
   }
 
   async findById(id: number) {
     return this.prisma.comment.findUnique({
       where: { id },
-      select: { id: true, postId: true, name: true, email: true, body: true },
+      select: SELECT,
     });
   }
 
   async findByIds(ids: number[]) {
     return this.prisma.comment.findMany({
       where: { id: { in: ids } },
-      select: { id: true, postId: true, name: true, email: true, body: true },
+      select: SELECT,
     });
   }
 
-  async create(postId: number, name: string, email: string, body: string) {
+  async create(postId: number, body: string, userId: number) {
     return this.prisma.comment.create({
-      data: { postId, name, email, body },
-      select: { id: true, postId: true, name: true, email: true, body: true },
+      data: { postId, body, userId },
+      select: SELECT,
     });
   }
 }

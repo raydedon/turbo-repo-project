@@ -9,9 +9,14 @@ const GET_COMMENTS = gql`
   query GetComments($postId: ID!) {
     comments(postId: $postId) {
       id
-      name
-      email
+      userId
       body
+      user {
+        id
+        name
+        username
+        email
+      }
     }
   }
 `;
