@@ -58,3 +58,27 @@ variable "subnet_ids" {
   description = "List of private subnet IDs for the RDS subnet group (min 2, different AZs)"
   type        = list(string)
 }
+
+variable "image_tag" {
+  description = "Docker image tag to deploy across all services"
+  type        = string
+  default     = "latest"
+}
+
+variable "ecs_cpu" {
+  description = "Fargate task CPU units (256 = 0.25 vCPU)"
+  type        = number
+  default     = 256
+}
+
+variable "ecs_memory" {
+  description = "Fargate task memory in MB"
+  type        = number
+  default     = 512
+}
+
+variable "desired_count" {
+  description = "Desired number of running ECS tasks per service"
+  type        = number
+  default     = 1
+}

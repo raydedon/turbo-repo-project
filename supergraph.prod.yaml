@@ -1,0 +1,27 @@
+federation_version: =2.9.0
+
+# Production supergraph config.
+# Subgraphs are reachable via Cloud Map private DNS (turbo-graphql.local).
+# The Apollo Router resolves these names inside the VPC.
+#
+# To compose the schema:
+#   rover supergraph compose --config supergraph.prod.yaml --output supergraph.graphql
+#
+# Note: rover must be run from an environment that can reach the subgraph services
+# (e.g. a CI runner inside the VPC, or using --skip-introspection with SDL files).
+
+subgraphs:
+  users:
+    routing_url: http://users-service.turbo-graphql.local:4001/graphql
+    schema:
+      subgraph_url: http://users-service.turbo-graphql.local:4001/graphql
+
+  posts:
+    routing_url: http://posts-service.turbo-graphql.local:4002/graphql
+    schema:
+      subgraph_url: http://posts-service.turbo-graphql.local:4002/graphql
+
+  comments:
+    routing_url: http://comments-service.turbo-graphql.local:4003/graphql
+    schema:
+      subgraph_url: http://comments-service.turbo-graphql.local:4003/graphql

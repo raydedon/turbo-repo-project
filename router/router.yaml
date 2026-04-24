@@ -8,3 +8,6 @@ cors:
     - GET
     - POST
     - OPTIONS
+
+health_check:
+  path: /health

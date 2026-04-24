@@ -43,10 +43,6 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
-    command: >
-      sh -c "npx prisma migrate deploy &&
-             npx prisma db seed &&
-             node dist/main"
 
   posts-service:
     build:
@@ -61,10 +57,6 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
-    command: >
-      sh -c "npx prisma migrate deploy &&
-             npx prisma db seed &&
-             node dist/main"
 
   comments-service:
     build:
@@ -79,10 +71,6 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
-    command: >
-      sh -c "npx prisma migrate deploy &&
-             npx prisma db seed &&
-             node dist/main"
 
   # ── Apollo Router (Supergraph Gateway) ───────────────────────────────────
   #
