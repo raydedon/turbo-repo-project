@@ -1,0 +1,12 @@
+# Local state (use S3 backend in production)
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Never commit real secrets
+terraform.tfvars
+
+# Lambda build artifacts
+modules/rds/db_init.zip
+modules/rds/lambda_build/

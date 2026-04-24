@@ -1,0 +1,24 @@
+{
+    "dbcode.connections": [
+        {
+            "connectionId": "XAd16kY1zich5iQqco4z5",
+            "name": "postgres",
+            "driver": "postgres",
+            "connectionType": "host",
+            "host": "turbo-graphql-production-postgres.cr8kweccwltz.ap-south-1.rds.amazonaws.com",
+            "port": 5432,
+            "ssl": true,
+            "authMethod": "password",
+            "username": "postgres",
+            "password": "",
+            "savePassword": "secretStorage",
+            "readOnly": false,
+            "postConnectionSqlType": "inline",
+            "connectionTimeout": 30,
+            "pinnedConnectionTimeout": "0",
+            "introspection": {
+                "progressive": false
+            }
+        }
+    ]
+}

@@ -8,9 +8,9 @@ Browser / Next.js apps
         ▼
 Apollo Router :4000  (supergraph gateway — run via `rover dev`)
         │
-        ├── users-service   :4001  (NestJS subgraph)  ── users-db   (Postgres :5432)
-        ├── posts-service   :4002  (NestJS subgraph)  ── posts-db   (Postgres :5433)
-        └── comments-service :4003 (NestJS subgraph)  ── comments-db (Postgres :5434)
+        ├── users-service    :4001  (NestJS subgraph)  ──┐
+        ├── posts-service    :4002  (NestJS subgraph)  ──┼── postgres :5432 (users_db / posts_db / comments_db)
+        └── comments-service :4003  (NestJS subgraph)  ──┘
 ```
 
 ## Local Dev (Recommended — `rover dev`)
@@ -26,10 +26,10 @@ curl -sSL https://rover.apollo.dev/nix/latest | sh
 # Apollo Router binary (rover dev downloads it automatically)
 ```
 
-### Step 2 — Start databases only
+### Step 2 — Start database only
 
 ```bash
-docker compose up users-db posts-db comments-db
+docker compose up postgres
 ```
 
 ### Step 3 — Copy env files and run migrations
@@ -118,8 +118,8 @@ query GetPost($id: ID!) {
     }
   }
   comments(postId: $id) {
-    name
-    email
+    id
+    userId
     body
   }
 }

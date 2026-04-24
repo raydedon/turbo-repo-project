@@ -1,0 +1,22 @@
+# Copy this to terraform.tfvars and fill in real values.
+# terraform.tfvars is git-ignored — never commit secrets.
+
+aws_region  = "ap-south-1"
+project     = "turbo-graphql"
+environment = "production"
+access_key  = "YOUR_AWS_ACCESS_KEY_HERE"
+secret_key  = "YOUR_AWS_SECRET_KEY_HERE"
+
+# Get these from your AWS VPC console or a VPC module output
+vpc_id     = "vpc-0411fd9fad810705e"
+subnet_ids = ["subnet-08b8036d1f95e3cf7", "subnet-0c5232e2073af7310", "subnet-07a57c2b3ea82adec"]
+
+# Which CIDR ranges can reach RDS (your ECS private subnets or VPN)
+allowed_cidr_blocks = ["172.31.0.0/16"]
+
+db_instance_class    = "db.t3.micro"
+db_allocated_storage = 20
+
+db_master_username = "postgres"
+# db_master_password — set via environment variable to avoid storing in file:
+#   export TF_VAR_db_master_password="your-strong-password"
