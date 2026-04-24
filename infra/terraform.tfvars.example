@@ -4,8 +4,10 @@
 aws_region  = "ap-south-1"
 project     = "turbo-graphql"
 environment = "production"
-access_key  = "YOUR_AWS_ACCESS_KEY_HERE"
-secret_key  = "YOUR_AWS_SECRET_KEY_HERE"
+# AWS credentials are NOT set here. The provider reads them automatically from:
+#   Local dev  — ~/.aws/credentials  (set up via `aws configure`)
+#   CI/CD      — AWS_ACCESS_KEY_ID + AWS_SECRET_ACCESS_KEY environment variables
+#                (store these as GitHub Actions secrets)
 
 # Get these from your AWS VPC console or a VPC module output
 vpc_id     = "vpc-0411fd9fad810705e"
