@@ -1,47 +1,87 @@
 import type { User } from "./types";
 
-// ---------------------------------------------------------------------------
-// GraphQL placeholder
-//
-// TODO: Replace these functions with GraphQL queries once the API is ready.
-//
-// Example shape for getUsers:
-//   query GetUsers {
-//     users {
-//       id
-//       name
-//       username
-//       email
-//       phone
-//       website
-//       address { street suite city zipcode }
-//       company { name }
-//     }
-//   }
-//
-// Example shape for getUserById:
-//   query GetUser($id: ID!) {
-//     user(id: $id) {
-//       id
-//       name
-//       username
-//       email
-//       phone
-//       website
-//       address { street suite city zipcode geo { lat lng } }
-//       company { name catchPhrase bs }
-//     }
-//   }
-// ---------------------------------------------------------------------------
+const GRAPHQL_URL =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:4000/graphql";
 
-const MOCK_USERS: User[] = [];
+async function gqlFetch<T>(
+  query: string,
+  variables?: Record<string, unknown>,
+): Promise<T> {
+  const res = await fetch(GRAPHQL_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query, variables }),
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`GraphQL request failed: ${res.status} ${res.statusText}`);
+  }
+
+  const { data, errors } = await res.json();
+
+  if (errors?.length) {
+    throw new Error(errors[0].message);
+  }
+
+  return data as T;
+}
 
 export async function getUsers(): Promise<User[]> {
-  // TODO: Replace with GraphQL query — see comment block above
-  return MOCK_USERS;
+  const data = await gqlFetch<{ users: User[] }>(
+    `query GetUsers {
+      users {
+        id
+        name
+        username
+        email
+        phone
+        website
+        address {
+          street
+          suite
+          city
+          zipcode
+          geo { lat lng }
+        }
+        company {
+          name
+          catchPhrase
+          bs
+        }
+      }
+    }`,
+  );
+
+  return data.users;
 }
 
 export async function getUserById(id: number): Promise<User | undefined> {
-  // TODO: Replace with GraphQL query — see comment block above
-  return MOCK_USERS.find((u) => u.id === id);
+  const data = await gqlFetch<{ user: User | null }>(
+    `query GetUser($id: ID!) {
+      user(id: $id) {
+        id
+        name
+        username
+        email
+        phone
+        website
+        address {
+          street
+          suite
+          city
+          zipcode
+          geo { lat lng }
+        }
+        company {
+          name
+          catchPhrase
+          bs
+        }
+      }
+    }`,
+    { id: String(id) },
+  );
+
+  return data.user ?? undefined;
 }

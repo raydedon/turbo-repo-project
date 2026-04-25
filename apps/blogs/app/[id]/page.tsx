@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPostById } from "../../lib/api";
+import { getPostById, getPosts } from "../../lib/api";
 import CommentsSection from "../../components/CommentsSection";
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const { posts } = await getPosts(1, 100);
+  return posts.map((post) => ({ id: String(post.id) }));
+}
 
 interface Props {
   params: Promise<{ id: string }>;
