@@ -74,9 +74,8 @@ services:
 
   # ── Apollo Router (Supergraph Gateway) ───────────────────────────────────
   #
-  # NOTE: Apollo Router requires a pre-composed supergraph schema.
-  # For local dev, use `rover dev` instead (auto-composes from live subgraphs).
-  # See README for instructions.
+  # NOT used for local dev — use rover dev instead:
+  #   rover dev --supergraph-config supergraph.yaml --router-config router/router.yaml
   #
   # apollo-router:
   #   image: ghcr.io/apollographql/router:v1.57.0
@@ -84,13 +83,16 @@ services:
   #     - '4000:4000'
   #   volumes:
   #     - ./router/router.yaml:/dist/config/router.yaml
-  #     - ./dist/schema/supergraph.graphql:/dist/schema/supergraph.graphql
+  #     - ./supergraph.graphql:/dist/schema/supergraph.graphql
   #   environment:
   #     APOLLO_ROUTER_CONFIG_PATH: /dist/config/router.yaml
+  #     APOLLO_ROUTER_SUPERGRAPH_PATH: /dist/schema/supergraph.graphql
   #   depends_on:
   #     - users-service
   #     - posts-service
   #     - comments-service
+  #   restart: unless-stopped
+    
 
 volumes:
   postgres-data:
