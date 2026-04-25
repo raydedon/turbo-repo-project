@@ -1,7 +1,7 @@
 {
   "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "applications": {
-    "blogs": {
+    "turbo-repo-project-blogs": {
       "packageName": "blogs",
       "development": {
         "local": {
@@ -10,7 +10,7 @@
         "fallback": "turbo-repo-project-blogs.vercel.app"
       }
     },
-    "users": {
+    "turbo-repo-project-users": {
       "packageName": "users",
       "development": {
         "local": {
