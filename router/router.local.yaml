@@ -3,11 +3,6 @@ supergraph:
   path: /graphql
   introspection: true
 
-override_subgraph_url:
-  users: http://users-service.turbo-graphql.local:4001/graphql
-  posts: http://posts-service.turbo-graphql.local:4002/graphql
-  comments: http://comments-service.turbo-graphql.local:4003/graphql
-
 cors:
   allow_any_origin: true
   allow_headers:
@@ -20,5 +15,4 @@ cors:
     - OPTIONS
 
 health_check:
-  listen: 0.0.0.0:4000
   path: /health

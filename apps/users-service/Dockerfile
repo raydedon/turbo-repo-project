@@ -18,4 +18,4 @@ RUN chmod +x entrypoint.sh
 
 ENV NODE_ENV=production
 EXPOSE 4001
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]

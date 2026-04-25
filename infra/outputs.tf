@@ -26,3 +26,8 @@ output "service_discovery_namespace" {
   description = "Cloud Map namespace used for inter-service communication"
   value       = module.ecs.service_discovery_namespace
 }
+
+output "acm_validation_records" {
+  description = "Add these CNAME records in Hostinger DNS to validate your ACM certificate"
+  value       = module.alb.acm_validation_records
+}

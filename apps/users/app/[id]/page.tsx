@@ -4,7 +4,7 @@ import type { User } from "../../lib/types";
 import UserPostsSection from "./components/UserPostsSection";
 
 const GRAPHQL_URL =
-  process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:4000";
+  process.env.NEXT_PUBLIC_GRAPHQL_URL ?? "http://localhost:4000/graphql";
 
 async function gqlFetch<T>(
   query: string,

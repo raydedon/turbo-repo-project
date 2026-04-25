@@ -1,9 +1,12 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
+import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../generated/prisma/client';
 
-const prisma = new PrismaClient({ adapter: new PrismaPg(process.env.DATABASE_URL!) });
+const connectionString = process.env.DATABASE_URL!.split('?')[0];
+const pool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 const POSTS = [
   { id: 1,  userId: 1, title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', body: 'quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto', publishedAt: new Date('2024-01-03T09:00:00Z') },
@@ -40,5 +43,5 @@ async function main() {
 }
 
 main()
-  .catch(console.error)
+  .catch((e) => { console.error(e); process.exit(1); })
   .finally(() => prisma.$disconnect());

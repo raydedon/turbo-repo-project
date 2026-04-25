@@ -6,7 +6,8 @@ import { PrismaClient } from "../generated/prisma/client";
 @Injectable()
 export class PrismaService extends PrismaClient {
   constructor() {
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    const connectionString = process.env.DATABASE_URL!.split('?')[0];
+    const pool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
     super({ adapter: new PrismaPg(pool) });
   }
 }

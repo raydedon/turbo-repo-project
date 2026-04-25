@@ -59,9 +59,9 @@ type Geo
 scalar join__FieldSet
 
 enum join__Graph {
-  COMMENTS @join__graph(name: "comments", url: "http://localhost:4003/graphql")
-  POSTS @join__graph(name: "posts", url: "http://localhost:4002/graphql")
-  USERS @join__graph(name: "users", url: "http://localhost:4001/graphql")
+  COMMENTS @join__graph(name: "comments", url: "http://comments-service.turbo-graphql.local:4003/graphql")
+  POSTS @join__graph(name: "posts", url: "http://posts-service.turbo-graphql.local:4002/graphql")
+  USERS @join__graph(name: "users", url: "http://users-service.turbo-graphql.local:4001/graphql")
 }
 
 scalar link__Import

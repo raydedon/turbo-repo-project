@@ -82,3 +82,9 @@ variable "desired_count" {
   type        = number
   default     = 1
 }
+
+variable "domain_name" {
+  description = "Subdomain for the GraphQL API (e.g. api.animeshray.space)"
+  type        = string
+  default     = "graphql.animeshray.space"
+}

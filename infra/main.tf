@@ -46,11 +46,12 @@ module "networking" {
 module "alb" {
   source = "./modules/alb"
 
-  project    = var.project
+  project     = var.project
   environment = var.environment
-  vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
-  alb_sg_id  = module.networking.alb_sg_id
+  vpc_id      = var.vpc_id
+  subnet_ids  = var.subnet_ids
+  alb_sg_id   = module.networking.alb_sg_id
+  domain_name = var.domain_name
 }
 
 module "ecs" {
