@@ -1,8 +1,15 @@
 # Local state (use S3 backend in production)
 *.tfstate
+*.tfstate.*
 *.tfstate.backup
 .terraform/
-.terraform.lock.hcl
+
+# Plan files can embed sensitive values
+tfplan
+*.tfplan
+
+# Local tool installers
+*.pkg
 
 # Never commit real secrets
 terraform.tfvars
