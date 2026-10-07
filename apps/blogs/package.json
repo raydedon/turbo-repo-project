@@ -13,6 +13,7 @@
   "dependencies": {
     "@apollo/client": "^4.1.7",
     "@repo/ui": "*",
+    "@sentry/nextjs": "^10.52.0",
     "graphql": "^16.13.2",
     "next": "16.2.0",
     "react": "^19.2.0",
