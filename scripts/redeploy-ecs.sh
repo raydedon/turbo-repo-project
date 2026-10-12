@@ -2,7 +2,7 @@
 set -e
 
 CLUSTER=turbo-graphql-production
-REGION=ap-south-1
+REGION=ap-southeast-2
 
 for SERVICE in users-service posts-service comments-service apollo-router; do
   echo "Redeploying $SERVICE..."

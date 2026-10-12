@@ -9,9 +9,9 @@ on:
         default: 'all'
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: ap-southeast-2
   PROJECT: turbo-graphql
-  ACCOUNT: 913524945602
+  ACCOUNT: 791896160927
 
 jobs:
   build-services:

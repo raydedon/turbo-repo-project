@@ -4,6 +4,6 @@ for SERVICE in users-service posts-service comments-service; do
     --cluster turbo-graphql-production \
     --task-definition "turbo-graphql-production-${SERVICE}-migrate" \
     --launch-type FARGATE \
-    --network-configuration "awsvpcConfiguration={subnets=[subnet-08b8036d1f95e3cf7,subnet-0c5232e2073af7310,subnet-07a57c2b3ea82adec],securityGroups=[sg-0d0538742dade05d1],assignPublicIp=ENABLED}" \
-    --region ap-south-1
+    --network-configuration "awsvpcConfiguration={subnets=[subnet-0f265e64bdfb9fb81,subnet-0774467101198569e,subnet-05e65717973969d81],securityGroups=[sg-03432f226e44a3890],assignPublicIp=ENABLED}" \
+    --region ap-southeast-2
 done

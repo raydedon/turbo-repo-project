@@ -112,19 +112,21 @@ resource "aws_db_instance" "this" {
   db_subnet_group_name   = aws_db_subnet_group.this.name
   vpc_security_group_ids = [aws_security_group.rds.id]
 
-  multi_az               = var.environment == "production" ? true : false
+  # Free-tier plan: single-AZ. Restore to production-only multi-AZ after upgrading the account.
+  multi_az               = false
   publicly_accessible    = false
   deletion_protection    = var.environment == "production" ? true : false
   skip_final_snapshot    = var.environment == "production" ? false : true
   final_snapshot_identifier = var.environment == "production" ? "${var.project}-${var.environment}-final-snapshot" : null
 
-  backup_retention_period = var.environment == "production" ? 7 : 1
+  # Free-tier plan caps backup retention. Was 7 for production.
+  backup_retention_period = 1
   backup_window           = "03:00-04:00"
   maintenance_window      = "mon:04:00-mon:05:00"
 
-  performance_insights_enabled = true
-  monitoring_interval          = 60
-  monitoring_role_arn          = aws_iam_role.rds_monitoring.arn
+  performance_insights_enabled = false
+  monitoring_interval          = 0
+  monitoring_role_arn          = null # re-enable with monitoring_interval = 60
 
   tags = {
     Name        = "${var.project}-${var.environment}-postgres"

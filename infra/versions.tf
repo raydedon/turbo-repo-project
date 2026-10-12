@@ -1,5 +1,12 @@
 terraform {
-  required_version = ">= 1.6"
+  required_version = ">= 1.10"
+
+  backend "s3" {
+    key          = "turbo-graphql/production.tfstate"
+    region       = "ap-southeast-2"
+    encrypt      = true
+    use_lockfile = true
+  }
 
   required_providers {
     aws = {

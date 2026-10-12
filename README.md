@@ -135,7 +135,7 @@ All services connect on `localhost:5432` with credentials `postgres / postgres`.
 
 ## Infrastructure (AWS)
 
-Terraform configuration lives in `infra/`. Currently deployed to `ap-south-1` (Mumbai):
+Terraform configuration lives in `infra/`. Currently deployed to `ap-southeast-2` (Sydney):
 
 - RDS PostgreSQL 15 (`db.t3.micro`, Multi-AZ, encrypted)
 - Three databases created via init Lambda
